@@ -293,7 +293,7 @@ namespace FancyWM
 
         private bool CanShowFocusRectangle()
         {
-            return m_showFocus && m_currentInteraction == UserInteraction.None && m_movingPanelNode == null;
+            return m_showFocus && m_currentInteraction == UserInteraction.None && m_movingNode == null;
         }
 
         private Rectangle? GetFocusRectangle(TilingNode? focusedNode)
@@ -307,14 +307,14 @@ namespace FancyWM
 
         private Rectangle? GetPreviewRectangle()
         {
-            if (m_currentInteraction == UserInteraction.Moving && m_delayReposition || m_movingPanelNode != null)
+            if (m_currentInteraction == UserInteraction.Moving && m_delayReposition || m_movingNode != null)
             {
                 try
                 {
                     var isSwapping = IsSwapModifierPressed();
                     var pt = m_workspace.CursorLocation;
 
-                    if (m_movingPanelNode == null)
+                    if (m_movingNode == null)
                     {
                         var window = m_workspace.FocusedWindow;
                         if (window == null)
@@ -334,7 +334,12 @@ namespace FancyWM
                     {
                         using (m_backendLock.EnterScope())
                         {
-                            var rect = m_backend.MockMoveNode(m_movingPanelNode, pt, allowNesting: !isSwapping).preArrange;
+                            var rect = m_backend.MockMoveNode(m_movingNode, pt, allowNesting: !isSwapping).preArrange;
+                            if (m_movingNode is not PanelNode)
+                            {
+                                // A window dragged by its tab previews like a window dragged by its title bar.
+                                return rect;
+                            }
                             var padding = GetPanelPaddingRect();
                             var spacing = GetPanelSpacing();
                             return new Rectangle(
@@ -887,18 +892,18 @@ namespace FancyWM
             });
         }
 
-        private void OnTilingPanelMoving(object? sender, PanelNode panel)
+        private void OnTilingNodeMoving(object? sender, TilingNode node)
         {
             m_currentInteraction = UserInteraction.Moving;
-            m_movingPanelNode = panel;
+            m_movingNode = node;
             InvalidateLayout();
         }
 
-        private void OnTilingPanelMoveRequested(object? sender, PanelNode panel)
+        private void OnTilingNodeMoveRequested(object? sender, TilingNode node)
         {
-            m_logger.Information("Panel {Panel} move ended", panel);
+            m_logger.Information("Node {Node} move ended", node);
             m_currentInteraction = UserInteraction.None;
-            m_movingPanelNode = null;
+            m_movingNode = null;
 
             try
             {
@@ -906,12 +911,12 @@ namespace FancyWM
                 var pt = m_workspace.CursorLocation;
                 using (m_backendLock.EnterScope())
                 {
-                    // Check that panel hasn't disappeared during the move.
-                    if (panel.Desktop == null)
+                    // Check that the node hasn't disappeared during the move.
+                    if (node.Desktop == null)
                     {
                         return;
                     }
-                    m_backend.MoveNode(panel, pt, allowNesting: !isSwapping);
+                    m_backend.MoveNode(node, pt, allowNesting: !isSwapping);
                 }
 
                 InvalidateLayout();
