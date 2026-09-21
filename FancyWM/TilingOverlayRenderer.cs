@@ -19,6 +19,8 @@ namespace FancyWM
     {
         public event EventHandler<PanelNode>? TilingPanelMoveRequested;
         public event EventHandler<PanelNode>? TilingPanelMoving;
+        public event EventHandler<TilingNode>? TilingTabMoveRequested;
+        public event EventHandler<TilingNode>? TilingTabMoving;
         public event EventHandler<TilingNode>? TilingNodeFocusRequested;
         public event EventHandler<TilingNode>? TilingNodePullUpRequested;
         public event EventHandler<TilingNode>? TilingNodeCloseRequested;
@@ -489,6 +491,10 @@ namespace FancyWM
                     TilingPanelMoveRequested?.Invoke(this, (PanelNode)view.ViewModel.Node!);
                 }
             }
+            else if (e.OriginalSource is TilingNodeTab { DataContext: TilingNodeViewModel { Node: TilingNode node } })
+            {
+                TilingTabMoveRequested?.Invoke(this, node);
+            }
         }
 
         private void OnDraggingEvent(object sender, RoutedEventArgs e)
@@ -499,6 +505,10 @@ namespace FancyWM
                 {
                     TilingPanelMoving?.Invoke(this, (PanelNode)view.ViewModel.Node!);
                 }
+            }
+            else if (e.OriginalSource is TilingNodeTab { DataContext: TilingNodeViewModel { Node: TilingNode node } })
+            {
+                TilingTabMoving?.Invoke(this, node);
             }
         }
 
@@ -530,6 +540,8 @@ namespace FancyWM
             InvalidateView();
 
             TilingPanelMoveRequested = null;
+            TilingTabMoveRequested = null;
+            TilingTabMoving = null;
             TilingNodeFocusRequested = null;
             TilingNodeCloseRequested = null;
             TilingNodePullUpRequested = null;
