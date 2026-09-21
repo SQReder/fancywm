@@ -2340,6 +2340,15 @@ namespace FancyWM.Resources {
                 return ResourceManager.GetString("Overlay.Window.AddRuleForProcess", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Add floating rule for process and title.
+        /// </summary>
+        public static string Overlay_Window_AddRuleForWindow {
+            get {
+                return ResourceManager.GetString("Overlay.Window.AddRuleForWindow", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Drag over another window to group.
@@ -2428,6 +2437,24 @@ namespace FancyWM.Resources {
         public static string Rules_ClassIgnoreList_Description {
             get {
                 return ResourceManager.GetString("Rules.ClassIgnoreList.Description", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically float by combined conditions.
+        /// </summary>
+        public static string Rules_CompositeIgnoreList {
+            get {
+                return ResourceManager.GetString("Rules.CompositeIgnoreList", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Floating mode will be automatically enabled for windows matching all conditions of a rule..
+        /// </summary>
+        public static string Rules_CompositeIgnoreList_Description {
+            get {
+                return ResourceManager.GetString("Rules.CompositeIgnoreList.Description", resourceCulture);
             }
         }
         

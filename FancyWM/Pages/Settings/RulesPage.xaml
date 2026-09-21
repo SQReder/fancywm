@@ -33,6 +33,13 @@
                     <TextBlock HorizontalAlignment="Stretch" Padding="0,16,0,0" VerticalAlignment="Center" Foreground="{DynamicResource SystemControlPageTextBaseMediumBrush}" TextWrapping="Wrap" Text="{x:Static res:Strings.Rules_ClassIgnoreList_Description}" />
                 </StackPanel>
             </Border>
+            <Border Style="{DynamicResource SettingsItemStyle}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock VerticalAlignment="Center" Text="{x:Static res:Strings.Rules_CompositeIgnoreList}" Margin="0, 0, 0, 16" />
+                    <controls:StringsListBox ItemsSource="{Binding CompositeIgnoreList, Mode=TwoWay}" />
+                    <TextBlock HorizontalAlignment="Stretch" Padding="0,16,0,0" VerticalAlignment="Center" Foreground="{DynamicResource SystemControlPageTextBaseMediumBrush}" TextWrapping="Wrap" Text="{x:Static res:Strings.Rules_CompositeIgnoreList_Description}" />
+                </StackPanel>
+            </Border>
         </ui:SimpleStackPanel>
     </Grid>
 </UserControl>
