@@ -84,6 +84,7 @@ namespace FancyWM.ViewModels
         public event RoutedEventHandler? BeginStackWith;
 
         public event RoutedEventHandler? FloatActionPressed;
+        public event RoutedEventHandler? StackSameProcessActionPressed;
         public event RoutedEventHandler? IgnoreProcessPressed;
         public event RoutedEventHandler? IgnoreClassPressed;
 
@@ -92,6 +93,7 @@ namespace FancyWM.ViewModels
         public ICommand BeginStackWithCommand { get; }
 
         public ICommand FloatCommand { get; }
+        public ICommand StackSameProcessCommand { get; }
         public ICommand IgnoreProcessCommand { get; }
         public ICommand IgnoreClassCommand { get; }
 
@@ -102,6 +104,7 @@ namespace FancyWM.ViewModels
             BeginStackWithCommand = new DelegateCommand(_ => BeginStackWith?.Invoke(this, new RoutedEventArgs()));
 
             FloatCommand = new DelegateCommand(_ => FloatActionPressed?.Invoke(this, new RoutedEventArgs()));
+            StackSameProcessCommand = new DelegateCommand(_ => StackSameProcessActionPressed?.Invoke(this, new RoutedEventArgs()));
             IgnoreProcessCommand = new DelegateCommand(_ => IgnoreProcessPressed?.Invoke(this, new RoutedEventArgs()));
             IgnoreClassCommand = new DelegateCommand(_ => IgnoreClassPressed?.Invoke(this, new RoutedEventArgs()));
         }
@@ -110,6 +113,7 @@ namespace FancyWM.ViewModels
         {
             base.Dispose();
             FloatActionPressed = null;
+            StackSameProcessActionPressed = null;
             IgnoreProcessPressed = null;
             IgnoreClassPressed = null;
             Node = null;

@@ -2376,7 +2376,16 @@ namespace FancyWM.Resources {
                 return ResourceManager.GetString("Overlay.Window.SingleClickToFocus", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Stack all windows of this app.
+        /// </summary>
+        public static string Overlay_Window_StackSameProcess {
+            get {
+                return ResourceManager.GetString("Overlay.Window.StackSameProcess", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Please see.
         /// </summary>

@@ -165,6 +165,12 @@
                         </Viewbox>
                     </Button>
                 </Border>
+                <Button Style="{StaticResource ActionButtonStyle}" Command="{Binding StackSameProcessCommand}">
+                    <Button.ToolTip>
+                        <TextBlock FontWeight="Bold" Text="{x:Static res:Strings.Overlay_Window_StackSameProcess}" />
+                    </Button.ToolTip>
+                    <ui:FontIcon Width="12" Height="20" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe MDL2 Assets" Glyph="&#xE81E;" />
+                </Button>
                 <Button Style="{StaticResource ActionButtonStyle}" Command="{Binding PullUpCommand}">
                     <Button.ToolTip>
                         <TextBlock FontWeight="Bold" Text="{x:Static res:Strings.Keybinding_PullWindowUp_Caption}" />

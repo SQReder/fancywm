@@ -805,6 +805,58 @@ namespace FancyWM
             WrapInStackPanel(e);
         }
 
+        private void OnWindowStackSameProcessRequested(object? sender, WindowNode e)
+        {
+            StackSameProcessWindows(e);
+        }
+
+        /// <summary>
+        /// Gathers all tiled windows of the same process on this display's
+        /// current desktop into one stack panel, next to the given window.
+        /// </summary>
+        private void StackSameProcessWindows(WindowNode window)
+        {
+            try
+            {
+                using (m_backendLock.EnterScope())
+                {
+                    var processName = window.WindowReference.GetCachedProcessName();
+                    var siblings = window.Desktop!.Root!.Windows
+                        .Where(x => x != window && x.WindowReference.GetCachedProcessName() == processName)
+                        .ToList();
+                    if (siblings.Count == 0)
+                    {
+                        return;
+                    }
+
+                    if (window.Parent is not StackPanelNode)
+                    {
+                        m_backend.WrapInStackPanel(window);
+                        window.Parent!.Padding = GetPanelPaddingRect();
+                        window.Parent!.Spacing = GetPanelSpacing();
+                    }
+
+                    foreach (var sibling in siblings)
+                    {
+                        // Moving a node may collapse panels, so look the stack up again.
+                        var stack = window.Parent!;
+                        if (sibling.Parent != stack)
+                        {
+                            m_backend.MoveAfter(sibling, stack.Children[^1]);
+                        }
+                    }
+
+                    m_backend.SetFocus(window);
+                    InvalidateLayout();
+                }
+            }
+            catch (TilingFailedException ex)
+            {
+                m_logger.Error(ex, "Attempted stack of {Node} windows failed", window);
+                PlacementFailed?.Invoke(this, new TilingFailedEventArgs(ex.FailReason));
+            }
+        }
+
         private void OnWindowPullUpRequested(object? sender, TilingNode e)
         {
             MoveToParentPanel(e);
