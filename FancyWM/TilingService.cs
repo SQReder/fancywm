@@ -211,6 +211,7 @@ namespace FancyWM
             m_gui.VerticalSplitRequested += OnWindowVerticalSplitRequested;
             m_gui.PullUpRequested += OnWindowPullUpRequested;
             m_gui.StackRequested += OnWindowStackRequested;
+            m_gui.StackSameProcessRequested += OnWindowStackSameProcessRequested;
             m_gui.IgnoreProcessRequested += OnWindowIgnoreProcessRequested;
             m_gui.IgnoreClassRequested += OnWindowIgnoreClassRequested;
 

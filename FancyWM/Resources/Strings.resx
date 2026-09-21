@@ -693,6 +693,9 @@
   <data name="Overlay.Window.SingleClickToFocus" xml:space="preserve">
     <value>Single click to focus</value>
   </data>
+  <data name="Overlay.Window.StackSameProcess" xml:space="preserve">
+    <value>Stack all windows of this app</value>
+  </data>
   <data name="Messages.NoPreviousDesktop" xml:space="preserve">
     <value>No previous desktop.</value>
   </data>

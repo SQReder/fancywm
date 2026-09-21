@@ -29,6 +29,7 @@ namespace FancyWM
         public event EventHandler<TilingNode>? StackRequested;
         public event EventHandler<TilingNode>? PullUpRequested;
         public event EventHandler<WindowNode>? FloatRequested;
+        public event EventHandler<WindowNode>? StackSameProcessRequested;
         public event EventHandler<WindowNode>? IgnoreProcessRequested;
         public event EventHandler<WindowNode>? IgnoreClassRequested;
         public event EventHandler<WindowNode>? BeginHorizontalWithRequested;
@@ -266,6 +267,7 @@ namespace FancyWM
                     windowViewModel.BeginVerticalSplitWith += WindowViewModel_BeginVerticalSplitWith;
                     windowViewModel.BeginStackWith += WindowViewModel_BeginStackWith;
                     windowViewModel.FloatActionPressed += WindowViewModel_FloatActionPressed;
+                    windowViewModel.StackSameProcessActionPressed += WindowViewModel_StackSameProcessActionPressed;
                     windowViewModel.HorizontalSplitActionPressed += WindowViewModel_HorizontalSplitActionPressed;
                     windowViewModel.VerticalSplitActionPressed += WindowViewModel_VerticalSplitActionPressed;
                     windowViewModel.PullUpActionPressed += WindowViewModel_PullUpActionPressed;
@@ -328,6 +330,11 @@ namespace FancyWM
         private void WindowViewModel_FloatActionPressed(object sender, RoutedEventArgs e)
         {
             FloatRequested?.Invoke(this, (WindowNode)((TilingWindowViewModel)sender!).Node!);
+        }
+
+        private void WindowViewModel_StackSameProcessActionPressed(object sender, RoutedEventArgs e)
+        {
+            StackSameProcessRequested?.Invoke(this, (WindowNode)((TilingWindowViewModel)sender!).Node!);
         }
 
         private void WindowViewModel_IgnoreProcessPressed(object sender, RoutedEventArgs e)
@@ -539,6 +546,7 @@ namespace FancyWM
             StackRequested = null;
             PullUpRequested = null;
             FloatRequested = null;
+            StackSameProcessRequested = null;
             IgnoreProcessRequested = null;
             IgnoreClassRequested = null;
         }
