@@ -86,6 +86,11 @@ namespace FancyWM.Models
             "RAIL_WINDOW",
         ];
 
+        /// <summary>
+        /// Rules combining several conditions, see <see cref="Utilities.CompositeWindowMatcher"/>.
+        /// </summary>
+        public List<string> CompositeIgnoreList { get; init; } = [];
+
         public bool RemindToRateReview { get; init; } = true;
 
         public bool ShowContextHints { get; init; } = true;

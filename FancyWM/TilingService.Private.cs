@@ -892,6 +892,15 @@ namespace FancyWM
             });
         }
 
+        private void OnWindowIgnoreWindowRequested(object? sender, WindowNode e)
+        {
+            var rule = CompositeWindowMatcher.CreateRule(e.WindowReference.GetCachedProcessName(), e.WindowReference.Title);
+            App.Current.AppState.Settings.SaveAsync(x =>
+            {
+                return x with { CompositeIgnoreList = [.. x.CompositeIgnoreList, rule] };
+            });
+        }
+
         private void OnTilingNodeMoving(object? sender, TilingNode node)
         {
             m_currentInteraction = UserInteraction.Moving;

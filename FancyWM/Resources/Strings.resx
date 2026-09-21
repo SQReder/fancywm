@@ -531,6 +531,12 @@
   <data name="Rules.ClassIgnoreList.Description" xml:space="preserve">
     <value>Floating mode will be automatically enabled for windows with a matching window class. The matching is not case-sensitive and you may use regular expressions.</value>
   </data>
+  <data name="Rules.CompositeIgnoreList" xml:space="preserve">
+    <value>Automatically float by combined conditions</value>
+  </data>
+  <data name="Rules.CompositeIgnoreList.Description" xml:space="preserve">
+    <value>Floating mode will be automatically enabled for windows matching all conditions of a rule. Enter one rule per line, joining conditions with "&amp;&amp;" (e.g. "process=vivaldi &amp;&amp; title=^Bitwarden"). Supported conditions are "process", "class" and "title". The matching is not case-sensitive and you may use regular expressions. The window title is only checked when the window appears.</value>
+  </data>
   <data name="Rules.FloatingWindows" xml:space="preserve">
     <value>Floating windows</value>
   </data>
@@ -683,6 +689,9 @@
   </data>
   <data name="Overlay.Window.AddRuleForProcess" xml:space="preserve">
     <value>Add floating rule for process</value>
+  </data>
+  <data name="Overlay.Window.AddRuleForWindow" xml:space="preserve">
+    <value>Add floating rule for process and title</value>
   </data>
   <data name="Overlay.Window.MoreOptions" xml:space="preserve">
     <value>More options</value>

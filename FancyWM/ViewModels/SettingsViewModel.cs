@@ -190,6 +190,8 @@ namespace FancyWM.ViewModels
 
         public IList<string>? ClassIgnoreList { get => m_classIgnoreList; set => SetField(ref m_classIgnoreList, value); }
 
+        public IList<string>? CompositeIgnoreList { get => m_compositeIgnoreList; set => SetField(ref m_compositeIgnoreList, value); }
+
         public bool MultiMonitorSupport { get => m_multiMonitorSupport; set => SetField(ref m_multiMonitorSupport, value); }
 
         public bool SoundOnFailure { get => m_soundOnFailure; set => SetField(ref m_soundOnFailure, value); }
@@ -218,6 +220,7 @@ namespace FancyWM.ViewModels
         private bool m_activateOnCapsLock;
         private IList<string>? m_processIgnoreList;
         private IList<string>? m_classIgnoreList;
+        private IList<string>? m_compositeIgnoreList;
         private bool m_multiMonitorSupport;
         private bool m_showContextHints;
         private bool m_soundOnFailure;
@@ -255,6 +258,7 @@ namespace FancyWM.ViewModels
                     PanelFontSize = settings.PanelFontSize;
                     ProcessIgnoreList = settings.ProcessIgnoreList;
                     ClassIgnoreList = settings.ClassIgnoreList;
+                    CompositeIgnoreList = settings.CompositeIgnoreList;
                     MultiMonitorSupport = settings.MultiMonitorSupport;
                     ShowContextHints = settings.ShowContextHints;
                     SoundOnFailure = settings.SoundOnFailure;
@@ -382,6 +386,7 @@ namespace FancyWM.ViewModels
                     ShowContextHints = ShowContextHints,
                     ProcessIgnoreList = [.. ProcessIgnoreList!],
                     ClassIgnoreList = [.. ClassIgnoreList!],
+                    CompositeIgnoreList = [.. CompositeIgnoreList!],
                     MultiMonitorSupport = MultiMonitorSupport,
                     SoundOnFailure = SoundOnFailure,
                     ShowFocus = ShowFocus,
